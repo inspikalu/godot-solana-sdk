@@ -117,7 +117,7 @@ func get_arweave_transaction(payer_kp: Keypair, file_name: String, file_data: Pa
 	var upload_price = int(str_to_var(upload_price_str[3].get_string_from_ascii()) * 1000000000 * 1.05)
 	
 	$SolanaClient2.get_latest_blockhash()
-	var bh = (await $SolanaClient2.http_response_received)[1]
+	var bh = (await $SolanaClient2.http_response_received)
 	if not bh.has("result"):
 		display_error(arweave_error + "Failed to fetch blockhash: " + str(bh))
 		return null
@@ -186,7 +186,7 @@ func upload_file_to_arweave(payer_kp: Keypair, file_name: String, file_data):
 	var upload_price = int(str_to_var(upload_price_str[3].get_string_from_ascii()) * 1000000000 * 1.05)
 	
 	$SolanaClient2.get_latest_blockhash()
-	var bh = (await $SolanaClient2.http_response_received)[1]
+	var bh = (await $SolanaClient2.http_response_received)
 	if not bh.has("result"):
 		display_error(arweave_error + "Failed to fetch blockhash: " + str(bh))
 		return
