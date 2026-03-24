@@ -241,9 +241,10 @@ void WalletAdapter::poll_connection() {
 				}
 
 				case MwaOperation::CAPABILITIES: {
-					connected = false;
-					connected_key = PackedByteArray();
-					mwa_auth_token = "";
+					// Preserve connection state — the transact() flow re-authorizes,
+					// so capture the potentially-refreshed auth token.
+					mwa_auth_token = android_plugin.call("getAuthToken");
+					mwa_wallet_uri_base = android_plugin.call("getWalletUriBase");
 
 					mwa_capabilities_json = android_plugin.call("getCapabilitiesResultJson");
 					clear_state();
@@ -261,6 +262,7 @@ void WalletAdapter::poll_connection() {
 					break;
 				}
 			}
+			break;
 		}
 		default:
 			connected = false;
